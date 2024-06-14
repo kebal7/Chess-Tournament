@@ -29,14 +29,15 @@ public class main {
         Player player7 = new Player("Anish");
         playerList.add(player7);
         
-        // Player player8 = new Player("Prag");
-        // playerList.add(player8);
+        Player player8 = new Player("Prag");
+        playerList.add(player8);
         
-        // Player player9 = new Player("Nihal");
-        // playerList.add(player9);
+        Player player9 = new Player("Nihal");
+        playerList.add(player9);
 
         KnockoutPool knockoutPool = new KnockoutPool(playerList);
-        knockoutPool.setInitialPairing();
-        knockoutPool.showPairing();
+        // knockoutPool.setInitialPairing();
+        // knockoutPool.showPairing();
+        knockoutPool.simulateTournament();
     }
 }

@@ -9,21 +9,10 @@ public class KnockoutPool {
         this.playerList = newPlayerList;
     }
 
-    void setInitialPairing() {
-
-        // Add "bye" players if needed
+    void setInitialPairing() 
+    {
         addByePlayers();
-
-        // Shuffle the player list for random order
-        Collections.shuffle(playerList);
-
-        // Create game pairings
-        for (int i = 0; i < playerList.size(); i += 2) {
-            if (i + 1 < playerList.size()) {
-                Game newGame = new Game(playerList.get(i), playerList.get(i + 1));
-                gameList.add(newGame);
-            }
-        }
+        createPairing();
     }
 
     int getAdjustedCount()
@@ -45,9 +34,56 @@ public class KnockoutPool {
         }
     }
 
+    void createPairing()
+    {
+        // Shuffle the player list for random order
+        Collections.shuffle(playerList);
+        // Create game pairings
+        for (int i = 0; i < playerList.size(); i += 2) {
+            if (i + 1 < playerList.size()) {
+                Game newGame = new Game(playerList.get(i), playerList.get(i + 1));
+                gameList.add(newGame);
+            }
+        }
+    }
+
     void showPairing() {
         for (Game game : gameList) {
             System.out.println(game.player1.getPlayerName() + " vs " + game.player2.getPlayerName());
+        }
+    }
+
+    void playRound() {
+        for (Game game : gameList) 
+        {
+            game.simulateGame();
+            playerList.remove(game.getLoser());
+            System.out.println(game.getWinner().getPlayerName());
+        }
+    }
+
+    void simulateTournament()
+    {
+        // setInitialPairing();
+        // showPairing();
+        // System.out.println("");
+
+        // playRound();
+        // gameList.clear();
+
+        // System.out.println("");
+
+        // setInitialPairing();
+        // showPairing();
+        while (playerList.size() > 1) 
+        {
+            setInitialPairing();
+            showPairing();
+            System.out.println("");
+
+            playRound();
+            gameList.clear();
+            System.out.println("");
         }
     }
 }
